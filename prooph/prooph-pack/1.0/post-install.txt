@@ -1,0 +1,2 @@
+- Create the `event_streams` table (if using docker, mount "$PWD"/vendor/prooph/pdo-event-store/scripts/postgres:/docker-entrypoint-initdb.d)
+

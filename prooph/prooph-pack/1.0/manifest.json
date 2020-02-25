@@ -1,0 +1,8 @@
+{
+    "copy-from-recipe": {
+        "config/": "%CONFIG_DIR%/"
+    },
+    "env": {
+        "PROOPH_DATABASE_URL": "postgresql://postgres:password@postgres:5432/postgres?serverVersion=11&charset=utf8"
+    }
+}

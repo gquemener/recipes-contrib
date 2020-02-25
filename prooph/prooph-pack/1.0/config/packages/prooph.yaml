@@ -1,0 +1,24 @@
+services:
+    Prooph\EventStore\EventStore:
+        class: Prooph\EventStore\Pdo\PostgresEventStore
+        arguments:
+            - '@app.prooph.message_factory'
+            - '@app.prooph.pdo_connection'
+            - '@app.prooph.persistence_strategy'
+
+    app.prooph.persistence_strategy:
+        class: Prooph\EventStore\Pdo\PersistenceStrategy\PostgresSingleStreamStrategy
+
+    app.prooph.message_factory:
+        class: Prooph\Common\Messaging\FQCNMessageFactory
+
+    app.prooph.dbal_connection:
+        class: Doctrine\DBAL\Connection
+        factory: [Doctrine\DBAL\DriverManager, getConnection]
+        arguments:
+            -
+                url: '%env(string:PROOPH_DATABASE_URL)%'
+
+    app.prooph.pdo_connection:
+        class: \PDO
+        factory: ['@app.prooph.dbal_connection', getWrappedConnection]
